@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!-- <!DOCTYPE html> 
 <html lang="en"> 
 <head> 
   <meta charset="UTF-8"> 
@@ -185,6 +185,419 @@ ${Number(product.price).toLocaleString('id-ID')}</div>
           </div> 
         `; 
       }); 
+  </script> 
+</body> 
+</html> -->
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rena Jimin Cake Shop</title> 
+  <style> 
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&display=swap');
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    } 
+     
+    body { 
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffe6f2 0%, #ffd1e8 100%);
+      color: #333; 
+      line-height: 1.6; 
+      min-height: 100vh;
+      padding: 20px; 
+      max-width: 1200px; 
+      margin: 0 auto;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Decorative elements */
+    .bubble {
+      position: fixed;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+      backdrop-filter: blur(3px);
+      z-index: -1;
+      animation: float 20s infinite ease-in-out;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-20px) translateX(10px); }
+      50% { transform: translateY(0) translateX(20px); }
+      75% { transform: translateY(20px) translateX(10px); }
+    }
+    
+    .header { 
+      text-align: center; 
+      margin-bottom: 40px; 
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+    } 
+    
+    .header::before {
+      content: "";
+      position: absolute;
+      width: 150%;
+      height: 50px;
+      background: linear-gradient(90deg, transparent, rgba(255, 182, 193, 0.5), transparent);
+      top: 0;
+      left: -25%;
+      animation: shine 3s infinite linear;
+    }
+    
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+     
+    .header h1 { 
+    font-family: 'Comic Neue', cursive;
+    font-size: 3rem; 
+    margin-bottom: 10px; 
+    color: #ff369b; 
+    font-weight: normal; 
+    letter-spacing: 1px;
+    text-shadow: 
+      2px 2px 6px rgba(255, 105, 180, 0.6), 
+      0 0 10px rgba(255, 182, 193, 0.4),
+      0 0 20px rgba(255, 182, 193, 0.2);
+    position: relative;
+    display: inline-block;
+} 
+
+    
+    .header h1::after {
+      content: "✨";
+      font-size: 1.5rem;
+      position: absolute;
+      right: -20px;
+      top: 0;
+    }
+     
+    .header p { 
+      font-style: normal; 
+      color: #d63384; 
+      font-weight: 600;
+      font-size: 1.1rem;
+    } 
+     
+    .products-container { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+      gap: 30px; 
+      margin-top: 30px;
+      perspective: 1000px;
+    } 
+     
+    .product { 
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px; 
+      overflow: hidden; 
+      box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2); 
+      transition: all 0.4s ease; 
+      position: relative; 
+      padding-bottom: 15px;
+      backdrop-filter: blur(5px);
+      transform-style: preserve-3d;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    } 
+     
+    .product:hover { 
+      transform: translateY(-10px) rotateX(5deg); 
+      box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+    } 
+    
+    .product::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+     
+    .product-image { 
+      height: 220px; 
+      overflow: hidden; 
+      position: relative; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      background-color: rgba(255, 228, 225, 0.6); 
+    } 
+     
+    .product-image img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 0.5s ease; 
+    } 
+     
+    .product:hover .product-image img { 
+      transform: scale(1.08); 
+    } 
+     
+    .product-details { 
+      padding: 18px; 
+      text-align: center; 
+      position: relative;
+      z-index: 2;
+    } 
+     
+    .product-name { 
+      font-weight: 700; 
+      font-size: 1.2rem; 
+      margin-bottom: 8px; 
+      color: #d63384; 
+    } 
+     
+    .product-price { 
+      font-weight: 600; 
+      color: #ff369b; 
+      font-size: 1.3rem; 
+      margin-top: 10px; 
+      display: inline-block;
+      padding: 5px 15px;
+      background: rgba(255, 228, 237, 0.8);
+      border-radius: 50px;
+      box-shadow: 0 3px 10px rgba(255, 105, 180, 0.2);
+    } 
+     
+    .cake-icon { 
+      position: absolute; 
+      width: 50px; 
+      height: 50px; 
+      background: linear-gradient(135deg, #ff9ed2, #ff6eb5);
+      border-radius: 50%; 
+      right: 10px; 
+      top: 10px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4); 
+      z-index: 10;
+      animation: pulse 2s infinite ease-in-out;
+    } 
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+     
+    .cake-icon::after { 
+      content: "🍰"; 
+      font-size: 24px; 
+    } 
+    
+    /* Add variety to cake icons */
+    .product:nth-child(3n+1) .cake-icon::after {
+      content: "🧁";
+    }
+    
+    .product:nth-child(3n+2) .cake-icon::after {
+      content: "🍰";
+    }
+    
+    .product:nth-child(3n+3) .cake-icon::after {
+      content: "🎂";
+    }
+    
+    /* Loading animation */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      font-size: 1.2rem;
+      color: #ff369b;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+    }
+    
+    .loading::after {
+      content: "...";
+      animation: dots 1.5s infinite;
+    }
+    
+    @keyframes dots {
+      0%, 20% { content: "."; }
+      40%, 60% { content: ".."; }
+      80%, 100% { content: "..."; }
+    }
+    
+    /* Error message */
+    .error-message {
+      text-align: center;
+      padding: 30px;
+      font-size: 1.2rem;
+      color: #d63384;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+    }
+    
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #ff9ed2, #ff6eb5);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 100;
+    }
+    
+    .scroll-indicator.visible {
+      opacity: 1;
+    }
+    
+    .scroll-indicator::after {
+      content: "↑";
+      font-size: 24px;
+    }
+     
+    @media (max-width: 768px) { 
+      .products-container { 
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+        gap: 20px;
+      } 
+       
+      .header h1 { 
+        font-size: 2.5rem; 
+      } 
+      
+      .product-image {
+        height: 180px;
+      }
+    } 
+    
+    @media (max-width: 480px) { 
+      .products-container { 
+        grid-template-columns: 1fr; 
+      } 
+       
+      .header h1 { 
+        font-size: 2rem; 
+      } 
+      
+      .header p {
+        font-size: 1rem;
+      }
+    }
+  </style> 
+</head> 
+<body> 
+  <!-- Decorative elements -->
+  <div class="bubble" style="width: 150px; height: 150px; left: 5%; top: 20%; animation-duration: 25s;"></div>
+  <div class="bubble" style="width: 100px; height: 100px; right: 10%; top: 15%; animation-duration: 20s; animation-delay: 2s;"></div>
+  <div class="bubble" style="width: 180px; height: 180px; left: 15%; bottom: 15%; animation-duration: 30s; animation-delay: 1s;"></div>
+  <div class="bubble" style="width: 120px; height: 120px; right: 20%; bottom: 25%; animation-duration: 22s; animation-delay: 3s;"></div>
+  
+  <div class="header"> 
+    <h1>Blushy Bakery</h1> 
+    <p>Kue manis untuk hari spesialmu</p> 
+  </div> 
+   
+  <div id="produk-list" class="products-container">
+    <div class="loading">Memuat produk</div>
+  </div> 
+  
+  <div class="scroll-indicator" id="scrollTop"></div>
+   
+  <script> 
+    // Create decorative bubbles
+    function createBubbles() {
+      const body = document.body;
+      for (let i = 0; i < 6; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.style.width = Math.random() * 60 + 40 + 'px';
+        bubble.style.height = bubble.style.width;
+        bubble.style.left = Math.random() * 90 + 5 + '%';
+        bubble.style.top = Math.random() * 90 + 5 + '%';
+        bubble.style.animationDuration = Math.random() * 10 + 15 + 's';
+        bubble.style.animationDelay = Math.random() * 5 + 's';
+        body.appendChild(bubble);
+      }
+    }
+    
+    createBubbles();
+    
+    // Fetch products
+    fetch('http://3.25.245.139/products') 
+      .then(response => response.json()) 
+      .then(data => { 
+        const list = document.getElementById('produk-list'); 
+        list.innerHTML = ''; // Clear loading message
+        
+        data.forEach(product => { 
+          const productElement = document.createElement('div'); 
+          productElement.className = 'product'; 
+          productElement.innerHTML = ` 
+            <div class="product-image"> 
+              <img src="https://bucket-uts-rena.s3.ap-southeast-2.amazonaws.com/${product.image_url}" alt="${product.name}" /> 
+              <div class="cake-icon"></div> 
+            </div> 
+            <div class="product-details"> 
+              <div class="product-name">${product.name}</div> 
+              <div class="product-price">Rp ${Number(product.price).toLocaleString('id-ID')}</div> 
+            </div> 
+          `; 
+           
+          list.appendChild(productElement); 
+        }); 
+      }) 
+      .catch(error => { 
+        console.error('Error fetching products:', error); 
+        document.getElementById('produk-list').innerHTML = ` 
+          <div class="error-message"> 
+            <p>Gagal memuat data produk. Silakan coba lagi nanti.</p> 
+          </div> 
+        `; 
+      }); 
+      
+    // Scroll to top button
+    const scrollButton = document.getElementById('scrollTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollButton.classList.add('visible');
+      } else {
+        scrollButton.classList.remove('visible');
+      }
+    });
+    
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
   </script> 
 </body> 
 </html>
